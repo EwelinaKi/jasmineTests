@@ -65,8 +65,8 @@ $(function () {
          * hiding/showing of the menu element.
          */
         it('is hidden by default', function() {
-            const classOfBodyTag = document.getElementsByTagName("body")[0].getAttribute("class");
-            expect(classOfBodyTag).toBe("menu-hidden");
+            const classesOfBodyTag = Array.from(document.getElementsByTagName("body")[0].classList);
+            expect(classesOfBodyTag).toContain("menu-hidden");
 
         });
 
@@ -83,15 +83,15 @@ $(function () {
 
             beforeEach(function() {
                 this.menuButton.click();
-                this.classOfBodyTag = document.getElementsByTagName("body")[0].getAttribute("class");
+                this.classesOfBodyTag = Array.from(document.getElementsByTagName("body")[0].classList);
             });
 
             it('can show', function() {
-                expect(this.classOfBodyTag).toBe("");
+                expect(this.classesOfBodyTag).not.toContain("menu-hidden");
             });
 
             it('can hide', function() {
-                expect(this.classOfBodyTag).toBe("menu-hidden");
+                expect(this.classesOfBodyTag).toContain("menu-hidden");
             });
         });
     });
@@ -110,8 +110,8 @@ $(function () {
         });
 
         it('has at least one .entry within the .feed container', function(done){
-            const checkEntry = Array.from(document.getElementsByClassName("feed")[0].children[0].firstElementChild.classList)[0];
-            expect(checkEntry).toBe("entry");
+            const checkEntry = Array.from(document.getElementsByClassName("feed")[0].children[0].firstElementChild.classList);
+            expect(checkEntry).toContain("entry");
             done();
         });
     });
@@ -136,12 +136,8 @@ $(function () {
 
         it('has loaded new content', function (done) {
             newContent = document.getElementsByClassName("feed")[0].children[0].innerHTML;
-            expect(oldContent).not.toBe(newContent);
+            expect(oldContent).not.toEqual(newContent);
             done();
-        });
-
-        afterEach(function() {
-            loadFeed(0);
         });
     });
 }());
