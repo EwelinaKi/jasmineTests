@@ -35,3 +35,7 @@ ensures when the `loadFeed` function is called and completes its work, there is 
 
 TEST 6 - feed has loaded new content  
 ensures when a new feed is loaded by the `loadFeed` function that the content actually changes.
+
+# How to run the app
+
+To run the Feadreader Jasmine tests app just click [this link](https://ewelinaki.github.io/jasmineTests/) or clone/ download the repo and run `index.html` file in any browser.
